@@ -1,51 +1,16 @@
-.calendar {
-  padding: 20px;
-}
-
-.calendar h2 {
-  margin-bottom: 16px;
-}
-
-.calendar-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 10px;
-}
-
-.calendar-day {
-  position: relative;
-  border: 1px solid #ddd;
-  background-color: #d3d3d3fb;
-  min-height: 100px;
+.taskDetail {
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
   padding: 5px;
-  font-size: 14px;
-}
-
-.day-number {
-  font-weight: bold;
-  color: black;
-}
-
-.task {
+  border-radius: 10px;
   background-color: #4f46e5;
   color: white;
-  padding: 4px;
-  margin-top: 4px;
-  border-radius: 4px;
-  font-size: 12px;
 }
-
-.passed {
-  opacity: 0.5;
+.taskDetail p {
+  border-bottom: 1px solid black;
 }
-
-.more-tasks {
-  position: absolute;
-  top: 0;
-  right: 0;
-  background-color: yellow;
-  padding: 2px;
-  margin: 3px 3px 0px 0px;
-  color: black;
-  border-radius: 50%;
+.taskDetail button {
+  margin: 5px;
+  border-radius: 10px;
 }

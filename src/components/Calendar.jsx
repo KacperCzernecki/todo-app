@@ -10,7 +10,6 @@ export const Calendar = () => {
   const maxDisplayedTasks = 2;
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth();
-
   const daysInMonth = new Date(year, month + 1, 0).getDate();
 
   const getTasksForDay = (day) => {
@@ -41,6 +40,7 @@ export const Calendar = () => {
             Date.parse(`${year}-${formatedMonth}-${formatedDay}`) -
               Date.parse(currentDate) <
             0;
+
           return (
             <div
               key={day}
