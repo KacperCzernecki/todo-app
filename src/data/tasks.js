@@ -17,10 +17,4 @@ export const tasks = [
     description: "Umówiona na godzinę 12:30",
     deadline: "2026-01-22",
   },
-  {
-    id: 4,
-    title: "Zwal se konia",
-    description: "Umówiona na godzinę 12:30",
-    deadline: "2026-01-20",
-  },
 ];
