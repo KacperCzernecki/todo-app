@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { tasks } from "../data/tasks";
 import "./Calendar.css";
+import { Details } from "./details";
 
 export const Calendar = () => {
   const [currentDate] = useState(new Date());
+  const [selectedDay, setSelectedDay] = useState(null);
 
   const maxDisplayedTasks = 2;
   const year = currentDate.getFullYear();
@@ -14,6 +16,13 @@ export const Calendar = () => {
   const getTasksForDay = (day) => {
     const dateString = `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
     return tasks.filter((tasks) => tasks.deadline === dateString);
+  };
+  const showDetails = (day) => {
+    const dateString = `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+    setSelectedDay(dateString);
+  };
+  const hideDetails = () => {
+    setSelectedDay(null);
   };
 
   return (
@@ -36,6 +45,7 @@ export const Calendar = () => {
             <div
               key={day}
               className={"calendar-day" + (dayPassed ? " passed" : "")}
+              onClick={() => showDetails(day)}
             >
               <span className="day-number">{day}</span>
               {dayTasks.length > maxDisplayedTasks && (
@@ -53,6 +63,7 @@ export const Calendar = () => {
           );
         })}
       </div>
+      {selectedDay && <Details date={selectedDay} onClose={hideDetails} />}
     </div>
   );
 };
