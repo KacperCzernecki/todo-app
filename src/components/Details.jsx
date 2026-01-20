@@ -25,7 +25,7 @@ export const Details = ({ date, onClose }) => {
               <b>Deadline:</b> {task.deadline}
             </p>
             <button className="edit">Edit</button>
-            <button className="done">Check as done</button>
+            <button className="done">Mark as done</button>
           </span>
         ))}
       </Modal.Body>

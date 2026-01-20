@@ -15,6 +15,6 @@ export const tasks = [
     id: 3,
     title: "Wizyta u dentysty",
     description: "Umówiona na godzinę 12:30",
-    deadline: "2026-01-22",
+    deadline: "2026-12-20",
   },
 ];

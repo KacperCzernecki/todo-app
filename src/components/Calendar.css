@@ -1,9 +1,11 @@
 .calendar {
+  position: relative;
   padding: 20px;
 }
 
 .calendar h2 {
   margin-bottom: 16px;
+  cursor: default;
 }
 
 .calendar-grid {
@@ -11,14 +13,23 @@
   grid-template-columns: repeat(7, 1fr);
   gap: 10px;
 }
-
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
 .calendar-day {
   position: relative;
   border: 1px solid #ddd;
   background-color: #d3d3d3fb;
   min-height: 100px;
+  min-width: 160px;
   padding: 5px;
   font-size: 14px;
+}
+.calendar-day:hover {
+  opacity: 0.8;
+  cursor: pointer;
 }
 
 .day-number {
@@ -37,6 +48,10 @@
 
 .passed {
   opacity: 0.5;
+}
+.calendar-day.today .day-number {
+  border: 1px solid black;
+  padding: 2px;
 }
 
 .more-tasks {
