@@ -2,6 +2,7 @@ import { useState } from "react";
 import { tasks } from "../data/tasks";
 import "./Calendar.css";
 import { Details } from "./Details";
+import { AddButton } from "./AddButton";
 
 export const Calendar = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -79,13 +80,17 @@ export const Calendar = () => {
               )}
 
               {dayTasks.slice(0, maxDisplayedTasks).map((task) => (
-                <div key={task.id} className="task">
+                <div
+                  key={task.id}
+                  className={"task" + (task.isDone ? " done" : "")}
+                >
                   <h3>{task.title}</h3>
                 </div>
               ))}
             </div>
           );
         })}
+        <AddButton />
       </div>
       {selectedDay && <Details date={selectedDay} onClose={hideDetails} />}
     </div>
