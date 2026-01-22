@@ -1,19 +1,27 @@
-import { useMemo } from "react";
-import { dbTasks } from "../data/tasks";
+import { useMemo, useState } from "react";
 import "./Calendar.css";
+import { Details } from "./details";
 import { AddButton } from "./AddButton";
-import { getMonthDaysWithTasks } from "../dateHelpers";
+import {
+  getMonthDaysWithTasks,
+  getReadableMonthFromUnix,
+} from "../dateHelpers";
 
-export const Calendar = ({ unixDate }) => {
+export const Calendar = ({ unixDate, tasks, updateTask }) => {
+  const [selectedDay, setSelectedDay] = useState(null);
   const maxDisplayedTasks = 2;
   const days = useMemo(
-    () => getMonthDaysWithTasks(dbTasks, unixDate),
-    [dbTasks, unixDate],
+    () => getMonthDaysWithTasks(tasks, unixDate),
+    [tasks, unixDate],
   );
   const handlePrev = () => {};
   const handleNext = () => {};
-  const showDetails = () => {};
-  const hideDetails = () => {};
+  const showDetails = (day) => {
+    setSelectedDay(day);
+  };
+  const hideDetails = () => {
+    setSelectedDay(null);
+  };
 
   return (
     <div className="calendar">
@@ -21,7 +29,7 @@ export const Calendar = ({ unixDate }) => {
         <button className="prev" onClick={handlePrev} type="button">
           Prev
         </button>
-        <h2></h2>
+        <h2>{getReadableMonthFromUnix(unixDate)}</h2>
         <button className="next" onClick={handleNext} type="button">
           Next
         </button>
@@ -35,11 +43,11 @@ export const Calendar = ({ unixDate }) => {
               onClick={() => showDetails(d)}
             >
               <span className="day-number">{d.day}</span>
-              {/* {dayTasks.length > maxDisplayedTasks && (
+              {d.tasks.length > maxDisplayedTasks && (
                 <span className="more-tasks">
-                  +{dayTasks.length - maxDisplayedTasks}
+                  +{d.tasks.length - maxDisplayedTasks}
                 </span>
-              )} */}
+              )}
 
               {d.tasks.slice(0, maxDisplayedTasks).map((task) => (
                 <div
@@ -54,7 +62,14 @@ export const Calendar = ({ unixDate }) => {
         })}
         <AddButton />
       </div>
-      {/* {selectedDay && <Details date={selectedDay} onClose={hideDetails} />} */}
+      {selectedDay && (
+        <Details
+          day={selectedDay.day}
+          unix={selectedDay.unix}
+          tasks={selectedDay.tasks}
+          onClose={hideDetails}
+        />
+      )}
     </div>
   );
 };

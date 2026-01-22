@@ -23,10 +23,8 @@ const unixToReadable = (unix) => {
   const day = pad(date.getDate());
   const month = pad(date.getMonth() + 1);
   const year = date.getFullYear();
-  const hours = pad(date.getHours());
-  const minutes = pad(date.getMinutes());
 
-  return `${day}-${month}-${year} ${hours}:${minutes}`;
+  return `${day}-${month}-${year}`;
 };
 const getTasksForDay = (tasks, unixDay) => {
   const targetDate =
@@ -52,14 +50,14 @@ const getMonthDaysWithTasks = (tasks, unixDate) => {
   const baseDate = new Date(unixDate * 1000);
 
   const year = baseDate.getFullYear();
-  const month = baseDate.getMonth(); // 0-based
+  const month = baseDate.getMonth();
 
   const daysInMonth = new Date(year, month + 1, 0).getDate();
 
   return Array.from({ length: daysInMonth }, (_, i) => {
     const dayDate = new Date(year, month, i + 1);
     dayDate.setHours(0, 0, 0, 0);
-    const startOfDay = Math.floor(dayDate.getTime() / 1000); // seconds
+    const startOfDay = Math.floor(dayDate.getTime() / 1000);
 
     const dayTasks = tasks.filter(
       (task) => Math.floor(task.deadline) === startOfDay,
@@ -68,8 +66,21 @@ const getMonthDaysWithTasks = (tasks, unixDate) => {
     return {
       day: i + 1,
       tasks: dayTasks,
+      unix: startOfDay,
     };
   });
+};
+const getReadableMonthFromUnix = (unixDate) => {
+  const date =
+    unixDate.toString().length === 10
+      ? new Date(unixDate * 1000)
+      : new Date(unixDate);
+  const year = date.getFullYear();
+  const monthName = date.toLocaleDateString("pl-PL", { month: "long" });
+
+  return (
+    monthName.charAt(0).toUpperCase() + monthName.slice(1) + " " + String(year)
+  );
 };
 
 export {
@@ -77,4 +88,5 @@ export {
   unixToReadable,
   getTasksForDay,
   getMonthDaysWithTasks,
+  getReadableMonthFromUnix,
 };
