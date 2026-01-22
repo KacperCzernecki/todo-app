@@ -2,9 +2,10 @@ import "./App.css";
 import { Calendar } from "./components/Calendar";
 
 function App() {
+  const unixToday = Math.floor(new Date().getTime() / 1000);
   return (
     <>
-      <Calendar />
+      <Calendar unixDate={unixToday} />
     </>
   );
 }
