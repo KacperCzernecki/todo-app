@@ -5,12 +5,15 @@ import { AddButton } from "./AddButton";
 import {
   getMonthDaysWithTasks,
   getReadableMonthFromUnix,
+  isBeforeUnix,
+  isTodayUnix,
 } from "../dateHelpers";
 
 export const Calendar = ({
   unixDate,
   tasks,
   updateTask,
+  removeTask,
   handlePrev,
   handleNext,
 }) => {
@@ -25,6 +28,10 @@ export const Calendar = ({
   };
   const hideDetails = () => {
     setSelectedDay(null);
+  };
+  const isBeforeToday = (unix) => {
+    const today = Math.floor(new Date().getTime() / 1000);
+    return isBeforeUnix(unix, today);
   };
 
   return (
@@ -43,7 +50,7 @@ export const Calendar = ({
           return (
             <div
               key={d.day}
-              className={"calendar-day"}
+              className={`calendar-day ${isBeforeToday(d.unix) && "passed"} ${isTodayUnix(d.unix) && "today"}`}
               onClick={() => showDetails(d)}
             >
               <span className="day-number">{d.day}</span>
@@ -73,6 +80,7 @@ export const Calendar = ({
           tasks={selectedDay.tasks}
           onClose={hideDetails}
           updateTask={updateTask}
+          removeTask={removeTask}
         />
       )}
     </div>

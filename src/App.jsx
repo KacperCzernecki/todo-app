@@ -21,6 +21,13 @@ function App() {
       return updatedTasks;
     });
   };
+  const removeTask = (taskId) => {
+    setTasks((prev) => {
+      const remainingTasks = prev.filter((t) => t.id !== taskId);
+      localStorage.setItem("tasks", JSON.stringify(remainingTasks));
+      return remainingTasks;
+    });
+  };
   const handleNextMonth = () => {
     setCurrentUnix((prev) => getNextMonthUnix(prev));
   };
@@ -34,6 +41,7 @@ function App() {
         unixDate={currentUnix}
         tasks={tasks}
         updateTask={updateTask}
+        removeTask={removeTask}
         handleNext={handleNextMonth}
         handlePrev={handlePrevMonth}
       />

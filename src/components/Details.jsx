@@ -3,8 +3,16 @@ import { getReadableMonthFromUnix, unixToReadable } from "../dateHelpers";
 import { useState } from "react";
 import "./Details.css";
 
-export const Details = ({ day, unix, tasks, onClose, updateTask }) => {
+export const Details = ({
+  day,
+  unix,
+  tasks,
+  onClose,
+  updateTask,
+  removeTask,
+}) => {
   const [editing, setEditing] = useState(null);
+  const [modalTasks, setModalTasks] = useState(tasks);
 
   const handleEdit = (task) => {
     setEditing({
@@ -12,6 +20,16 @@ export const Details = ({ day, unix, tasks, onClose, updateTask }) => {
       title: task.title,
       description: task.description,
     });
+  };
+  const handleDone = (task) => {
+    const done = { ...task, complete: !task.complete };
+    updateTask(task.id, done);
+    setModalTasks((prev) => prev.map((t) => (t.id === done.id ? done : t)));
+  };
+  const handleRemove = (task) => {
+    removeTask(task.id);
+    setModalTasks((prev) => prev.filter((t) => t.id !== task.id));
+    setEditing(null);
   };
 
   const handleSave = (task) => {
@@ -22,6 +40,9 @@ export const Details = ({ day, unix, tasks, onClose, updateTask }) => {
     };
     updateTask(task.id, updated);
     setEditing(null);
+    setModalTasks((prev) =>
+      prev.map((t) => (t.id === updated.id ? updated : t)),
+    );
   };
 
   const handleCancel = () => {
@@ -36,8 +57,11 @@ export const Details = ({ day, unix, tasks, onClose, updateTask }) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="container">
-        {tasks.map((t) => (
-          <span key={t.id} className={"taskDetail"}>
+        {modalTasks.map((t) => (
+          <span
+            key={t.id}
+            className={"taskDetail" + (t.complete ? " done" : "")}
+          >
             <div>
               <b>Tytuł:</b>
               {editing?.id === t.id ? (
@@ -85,10 +109,16 @@ export const Details = ({ day, unix, tasks, onClose, updateTask }) => {
                 </button>
               </div>
             ) : (
-              <button className="done" onClick={() => handleEdit(t)}>
+              <button className="edit" onClick={() => handleEdit(t)}>
                 Edit
               </button>
             )}
+            <button className="doneBtn" onClick={() => handleDone(t)}>
+              {t.complete ? "Mark as not done" : "Mark as done"}
+            </button>
+            <button className="delete" onClick={() => handleRemove(t)}>
+              Delete
+            </button>
           </span>
         ))}
       </Modal.Body>

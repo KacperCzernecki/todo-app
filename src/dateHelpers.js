@@ -100,6 +100,24 @@ const getPrevMonthUnix = (unixDate) => {
 
   return Math.floor(nextMonthDate.getTime() / 1000);
 };
+const isBeforeUnix = (unixDate, comapreDate) => {
+  const date = new Date(unixDate * 1000);
+  const compare = new Date(comapreDate * 1000);
+  compare.setHours(0, 0, 0, 0);
+  date.setHours(0, 0, 0, 0);
+
+  return compare > date;
+};
+const isTodayUnix = (unix) => {
+  const date = new Date(unix * 1000);
+  const today = new Date();
+
+  return (
+    date.getFullYear() === today.getFullYear() &&
+    date.getMonth() === today.getMonth() &&
+    date.getDate() === today.getDate()
+  );
+};
 export {
   readableToUnix,
   unixToReadable,
@@ -108,4 +126,6 @@ export {
   getReadableMonthFromUnix,
   getNextMonthUnix,
   getPrevMonthUnix,
+  isBeforeUnix,
+  isTodayUnix,
 };

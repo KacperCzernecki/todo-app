@@ -6,6 +6,7 @@
   border-radius: 10px;
   background-color: #4f46e5;
   color: white;
+  transition: 0.7s;
 }
 .taskDetail p {
   border-bottom: 1px solid black;
@@ -16,4 +17,13 @@
 }
 .modal-title {
   text-align: center;
+}
+.delete {
+  background-color: #dc2626;
+}
+.taskDetail.done {
+  background-color: green;
+  opacity: 1;
+  text-decoration: none;
+  transition: 0.7s;
 }
