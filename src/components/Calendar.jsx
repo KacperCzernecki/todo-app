@@ -7,15 +7,19 @@ import {
   getReadableMonthFromUnix,
 } from "../dateHelpers";
 
-export const Calendar = ({ unixDate, tasks, updateTask }) => {
+export const Calendar = ({
+  unixDate,
+  tasks,
+  updateTask,
+  handlePrev,
+  handleNext,
+}) => {
   const [selectedDay, setSelectedDay] = useState(null);
   const maxDisplayedTasks = 2;
   const days = useMemo(
     () => getMonthDaysWithTasks(tasks, unixDate),
     [tasks, unixDate],
   );
-  const handlePrev = () => {};
-  const handleNext = () => {};
   const showDetails = (day) => {
     setSelectedDay(day);
   };
@@ -68,6 +72,7 @@ export const Calendar = ({ unixDate, tasks, updateTask }) => {
           unix={selectedDay.unix}
           tasks={selectedDay.tasks}
           onClose={hideDetails}
+          updateTask={updateTask}
         />
       )}
     </div>

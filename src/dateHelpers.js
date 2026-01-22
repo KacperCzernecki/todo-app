@@ -82,11 +82,30 @@ const getReadableMonthFromUnix = (unixDate) => {
     monthName.charAt(0).toUpperCase() + monthName.slice(1) + " " + String(year)
   );
 };
+const getNextMonthUnix = (unixDate) => {
+  const date = new Date(unixDate * 1000);
+  const year = date.getFullYear();
+  const month = date.getMonth();
+  const nextMonthDate = new Date(year, month + 1, 1);
+  nextMonthDate.setHours(0, 0, 0, 0);
 
+  return Math.floor(nextMonthDate.getTime() / 1000);
+};
+const getPrevMonthUnix = (unixDate) => {
+  const date = new Date(unixDate * 1000);
+  const year = date.getFullYear();
+  const month = date.getMonth();
+  const nextMonthDate = new Date(year, month - 1, 1);
+  nextMonthDate.setHours(0, 0, 0, 0);
+
+  return Math.floor(nextMonthDate.getTime() / 1000);
+};
 export {
   readableToUnix,
   unixToReadable,
   getTasksForDay,
   getMonthDaysWithTasks,
   getReadableMonthFromUnix,
+  getNextMonthUnix,
+  getPrevMonthUnix,
 };
