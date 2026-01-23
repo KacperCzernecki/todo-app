@@ -41,8 +41,8 @@ To run the tests:
 
     npm run test
 
-    or
-    -runs all tests at once
+or
+-runs all tests at once
 
     npm run test:run
 
