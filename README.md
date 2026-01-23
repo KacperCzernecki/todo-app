@@ -55,8 +55,8 @@ The tests are defined in the src/tests/ directory. This makes testing components
 .
 ├── src/
 │   ├── components/              # UI components
-│   │   ├── AddButton.jsx        # Button for adding new todos
-│   │   ├── AddButton.css        # Styles for AddButton component
+│   │   ├── AddTaskForm.jsx        # Form for adding todo elements
+│   │   ├── AddTaskForm.css        # Styles for AddTaskForm
 │   │   ├── Calendar.jsx         # Calendar view component
 │   │   ├── Calendar.css         # Styles for Calendar component
 │   │   ├── Details.jsx          # Todo details view
