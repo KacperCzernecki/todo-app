@@ -1,6 +1,8 @@
 import Modal from "react-bootstrap/Modal";
 import { getReadableMonthFromUnix, unixToReadable } from "../dateHelpers";
 import { useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import "./Details.css";
 
 export const Details = ({
@@ -19,6 +21,7 @@ export const Details = ({
       id: task.id,
       title: task.title,
       description: task.description,
+      deadline: new Date(task.deadline * 1000),
     });
   };
   const handleDone = (task) => {
@@ -37,6 +40,7 @@ export const Details = ({
       ...task,
       title: editing.title,
       description: editing.description,
+      deadline: Math.floor(editing.deadline.getTime() / 1000),
     };
     updateTask(task.id, updated);
     setEditing(null);
@@ -94,7 +98,18 @@ export const Details = ({
             </div>
             <div>
               <b>Do:</b>
-              <p>{unixToReadable(t.deadline)}</p>
+              {editing?.id === t.id ? (
+                <DatePicker
+                  selected={editing.deadline}
+                  onChange={(date) =>
+                    setEditing({ ...editing, deadline: date })
+                  }
+                  dateFormat="dd-MM-yyyy"
+                  className="form-control"
+                />
+              ) : (
+                <p>{unixToReadable(t.deadline)}</p>
+              )}
             </div>
             {editing?.id === t.id ? (
               <div>

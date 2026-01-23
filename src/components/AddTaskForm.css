@@ -1,0 +1,14 @@
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+input,
+textarea {
+  background-color: white;
+  color: black;
+  resize: none;
+}
+.date-picker {
+  width: 100%;
+}

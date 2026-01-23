@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import "./Calendar.css";
 import { Details } from "./details";
-import { AddButton } from "./AddButton";
+import { AddTaskForm } from "./AddTaskForm";
 import {
   getMonthDaysWithTasks,
   getReadableMonthFromUnix,
@@ -18,6 +18,7 @@ export const Calendar = ({
   handleNext,
 }) => {
   const [selectedDay, setSelectedDay] = useState(null);
+  const [isAddFormOpen, setIsAddFormOpen] = useState(false);
   const maxDisplayedTasks = 2;
   const days = useMemo(
     () => getMonthDaysWithTasks(tasks, unixDate),
@@ -33,7 +34,6 @@ export const Calendar = ({
     const today = Math.floor(new Date().getTime() / 1000);
     return isBeforeUnix(unix, today);
   };
-
   return (
     <div className="calendar">
       <div className="calendar-header">
@@ -74,7 +74,13 @@ export const Calendar = ({
             </div>
           );
         })}
-        <AddButton />
+        <button
+          className="add-btn"
+          title="Dodaj nowe zadanie"
+          onClick={() => setIsAddFormOpen(true)}
+        >
+          +
+        </button>
       </div>
       {selectedDay && (
         <Details
@@ -84,6 +90,13 @@ export const Calendar = ({
           onClose={hideDetails}
           updateTask={updateTask}
           removeTask={removeTask}
+        />
+      )}
+      {isAddFormOpen && (
+        <AddTaskForm
+          onClose={() => setIsAddFormOpen(false)}
+          day={unixDate}
+          tasks={tasks}
         />
       )}
     </div>
