@@ -26,10 +26,12 @@
   min-width: 160px;
   padding: 5px;
   font-size: 14px;
+  transition: 0.5s;
 }
 .calendar-day:hover {
   opacity: 0.8;
   cursor: pointer;
+  transition: 0.5s;
 }
 
 .day-number {

@@ -1,18 +1,83 @@
-# React + Vite
+# Todo App - Kacper Czernecki
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Simple web-app made in React using Vite - it allows you to create, view and manage tasks. Project also serves as a basis for automated testing using the Vitest framework
 
-Currently, two official plugins are available:
+## 🧩Project description
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The app displays a list of tasks, allows you to add new ones, mark them as completet, remove or edit them (CRUD). The project was created in React + Vite enviroment.
 
-## React Compiler
+## 🛠️ Tools used
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+The project uses:
+**React**
+**Vite**
+**npm**
+**Vitest**
+**@testing-library/react**
 
-Note: This will impact Vite dev & build performances.
+## 🚀 Startup instructions
 
-## Expanding the ESLint configuration
+    1. Clone the repository:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+    git clone https://github.com/KacperCzernecki/todo-app.git
+    cd todo-app/front
+
+    2. Install dependencies:
+
+    npm install
+
+    3. Lunch in dev mode:
+
+    npm run dev
+
+    4. Open your browser and go to <ins>[localhost](http://localhost:5173/)</ins>
+
+## 🧪 Testing instructions
+
+    The project includes automated tests based on Vitest.
+    To run the tests:
+    -runs Vitest in watch mode (continuous testing when changes are made)
+
+    npm run test
+
+    or
+    -runs all tests at once
+
+    npm run test:run
+
+The tests are defined in the src/tests/ directory. This makes testing components and application logic easier and more organized.
+
+## 🏗️ Project Structure
+
+```text
+.
+├── src/
+│   ├── components/              # UI components
+│   │   ├── AddButton.jsx        # Button for adding new todos
+│   │   ├── AddButton.css        # Styles for AddButton component
+│   │   ├── Calendar.jsx         # Calendar view component
+│   │   ├── Calendar.css         # Styles for Calendar component
+│   │   ├── Details.jsx          # Todo details view
+│   │   └── Details.css          # Styles for Details component
+│   │
+│   ├── tests/                   # Automated tests (Vitest)
+│   │   ├── App.test.jsx
+│   │   ├── Calendar.test.jsx
+│   │   └── AddButton.test.jsx
+|   |   └── setup.js
+│   │
+│   ├── App.jsx                  # Root application component
+│   ├── App.css                  # Global App styles
+│   ├── dateHelpers.js           # Date utility functions
+│   ├── index.css                # Global styles
+│   └── main.jsx                 # Application entry point
+│
+├── index.html                   # HTML template
+├── package.json                 # Project configuration and scripts
+├── package-lock.json            # Locked dependency versions
+├── vite.config.js               # Vite configuration
+├── eslint.config.js             # ESLint configuration
+├── .gitignore                   # Git ignored files
+└── README.md                    # Project documentation
+
+```
