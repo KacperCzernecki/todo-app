@@ -47,6 +47,9 @@ export const Calendar = ({
       </div>
       <div className="calendar-grid">
         {days.map((d) => {
+          const sortTaskByCompletion = d.tasks
+            .sort((a, b) => a.complete - b.complete)
+            .slice(0, maxDisplayedTasks);
           return (
             <div
               key={d.day}
@@ -60,7 +63,7 @@ export const Calendar = ({
                 </span>
               )}
 
-              {d.tasks.slice(0, maxDisplayedTasks).map((task) => (
+              {sortTaskByCompletion.map((task) => (
                 <div
                   key={task.id}
                   className={"task" + (task.complete ? " done" : "")}
