@@ -34,9 +34,10 @@ The project uses:
 
 ## 🧪 Testing instructions
 
-    The project includes automated tests based on Vitest.
-    To run the tests:
-    -runs Vitest in watch mode (continuous testing when changes are made)
+The project includes automated tests based on Vitest.
+
+To run the tests:
+-runs Vitest in watch mode (continuous testing when changes are made)
 
     npm run test
 
