@@ -17,32 +17,33 @@ The project uses:
 
 ## 🚀 Startup instructions
 
-1. Clone the repository:
+Clone the repository
 
-   git clone https://github.com/KacperCzernecki/todo-app.git
-   cd todo-app/front
+    git clone https://github.com/KacperCzernecki/todo-app.git
+    cd todo-app/front
 
-2. Install dependencies:
+Install dependencies
 
-   npm install
+    npm install
 
-3. Lunch in dev mode:
+Lunch in dev mode
 
-   npm run dev
+    npm run dev
 
-4. Open your browser and go to [localhost](http://localhost:5173/)
+Open your browser and go to [localhost](http://localhost:5173/)
 
 ## 🧪 Testing instructions
 
 The project includes automated tests based on Vitest.
 
 To run the tests:
--runs Vitest in watch mode (continuous testing when changes are made)
+
+runs Vitest in watch mode (continuous testing when changes are made)
 
     npm run test
 
 or
--runs all tests at once
+runs all tests at once
 
     npm run test:run
 
