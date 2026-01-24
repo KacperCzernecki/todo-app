@@ -4,6 +4,10 @@ import { useState } from "react";
 import { getNextMonthUnix, getPrevMonthUnix } from "./dateHelpers";
 
 function App() {
+  const [counterId, setCounterId] = useState(() => {
+    const count = localStorage.getItem("counter");
+    return count ? Number(count) : 0;
+  });
   const [tasks, setTasks] = useState(() => {
     const data = localStorage.getItem("tasks");
     return data ? JSON.parse(data) : [];
@@ -21,6 +25,27 @@ function App() {
       return updatedTasks;
     });
   };
+  const addTask = (title, description, deadline) => {
+    setCounterId((prev) => {
+      const newId = prev + 1;
+      localStorage.setItem("counter", String(newId));
+      return newId;
+    });
+
+    setTasks((prevTasks) => {
+      const newTask = {
+        id: counterId + 1, // albo użyj closure newId
+        title,
+        description,
+        deadline,
+        complete: false,
+      };
+      const updatedTasks = [...prevTasks, newTask];
+      localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+      return updatedTasks;
+    });
+  };
+
   const removeTask = (taskId) => {
     setTasks((prev) => {
       const remainingTasks = prev.filter((t) => t.id !== taskId);
@@ -44,6 +69,7 @@ function App() {
         removeTask={removeTask}
         handleNext={handleNextMonth}
         handlePrev={handlePrevMonth}
+        addTask={addTask}
       />
     </>
   );

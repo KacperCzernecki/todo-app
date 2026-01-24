@@ -59,9 +59,14 @@ const getMonthDaysWithTasks = (tasks, unixDate) => {
     dayDate.setHours(0, 0, 0, 0);
     const startOfDay = Math.floor(dayDate.getTime() / 1000);
 
-    const dayTasks = tasks.filter(
-      (task) => Math.floor(task.deadline) === startOfDay,
-    );
+    const dayTasks = tasks.filter((task) => {
+      const taskDate = new Date(task.deadline * 1000);
+      return (
+        taskDate.getFullYear() === dayDate.getFullYear() &&
+        taskDate.getMonth() === dayDate.getMonth() &&
+        taskDate.getDate() === dayDate.getDate()
+      );
+    });
 
     return {
       day: i + 1,

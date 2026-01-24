@@ -16,9 +16,12 @@ export const Calendar = ({
   removeTask,
   handlePrev,
   handleNext,
+  addTask,
 }) => {
   const [selectedDay, setSelectedDay] = useState(null);
   const [isAddFormOpen, setIsAddFormOpen] = useState(false);
+  const [dayForNewTask, setDayForNewTask] = useState(null);
+
   const maxDisplayedTasks = 2;
   const days = useMemo(
     () => getMonthDaysWithTasks(tasks, unixDate),
@@ -34,6 +37,16 @@ export const Calendar = ({
     const today = Math.floor(new Date().getTime() / 1000);
     return isBeforeUnix(unix, today);
   };
+
+  const handleDayClick = (day) => {
+    if (day.tasks.length > 0) {
+      showDetails(day);
+    } else {
+      setDayForNewTask(day.unix); // dokładny dzień w unix
+      setIsAddFormOpen(true);
+    }
+  };
+
   return (
     <div className="calendar">
       <div className="calendar-header">
@@ -54,7 +67,7 @@ export const Calendar = ({
             <div
               key={d.day}
               className={`calendar-day ${isBeforeToday(d.unix) && "passed"} ${isTodayUnix(d.unix) && "today"}`}
-              onClick={() => showDetails(d)}
+              onClick={() => handleDayClick(d)}
             >
               <span className="day-number">{d.day}</span>
               {d.tasks.length > maxDisplayedTasks && (
@@ -95,8 +108,9 @@ export const Calendar = ({
       {isAddFormOpen && (
         <AddTaskForm
           onClose={() => setIsAddFormOpen(false)}
-          day={unixDate}
-          tasks={tasks}
+          day={dayForNewTask}
+          updateTask={updateTask}
+          addTask={addTask}
         />
       )}
     </div>

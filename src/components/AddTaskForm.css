@@ -12,3 +12,6 @@ textarea {
 .date-picker {
   width: 100%;
 }
+input[type="submit"] {
+  background-color: darkblue;
+}
