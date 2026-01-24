@@ -65,7 +65,7 @@ The tests are defined in the src/tests/ directory. This makes testing components
 │   ├── tests/                   # Automated tests (Vitest)
 │   │   ├── App.test.jsx
 │   │   ├── Calendar.test.jsx
-│   │   └── AddButton.test.jsx
+│   │   └── TaskForm.test.jsx
 |   |   └── setup.js
 │   │
 │   ├── App.jsx                  # Root application component

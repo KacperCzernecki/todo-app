@@ -24,15 +24,17 @@ export const AddTaskForm = ({ onClose, day, addTask }) => {
       </Modal.Header>
       <Modal.Body className="container">
         <form onSubmit={handleSubmit}>
-          <label>Task Title:</label>
+          <label htmlFor="task-title">Task Title:</label>
           <input
+            id="task-title"
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
 
-          <label>Task Description:</label>
+          <label htmlFor="task-desc">Task Description:</label>
           <textarea
+            id="task-desc"
             wrap="soft"
             maxLength={120}
             placeholder="Max. 120 characters"
@@ -42,8 +44,9 @@ export const AddTaskForm = ({ onClose, day, addTask }) => {
             }}
           ></textarea>
 
-          <label>Task Deadline: </label>
+          <label htmlFor="task-deadline">Task Deadline: </label>
           <DatePicker
+            id="task-deadline"
             className="date-picker"
             selected={deadline}
             onChange={(date) => setDeadline(date)}
